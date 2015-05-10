@@ -1,0 +1,10 @@
+<?php
+	    include ('../config/settings.php');
+	    $settings = new Settings_INI;  
+	    $settings->load('../config/config.ini');  
+	    $FAQ = $settings->get('db.FAQ');
+	    
+	    if(!empty($FAQ)){
+	        echo "<li><a href='message.php'>FAQπ‹¿Ì</a></li>";
+	    }
+	?>

@@ -1,0 +1,516 @@
+<?php
+        include_once "header.php";
+$sch_table='yx_xx';
+        include ('config/settings.php');
+        $settings = new Settings_INI;  
+        $settings->load('config/config.ini');  
+        $FAQ = $settings->get('db.FAQ');
+        
+        if(!empty($FAQ)){
+            $faq=1;
+        }
+    ?>
+    <div class="row">
+
+        <div class="col-lg-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h1 class="panel-title">通知公告</h1>
+                </div>
+				
+                <div class="panel-body">
+
+
+                     <table class="table table-hover table-responsive">
+                        <tbody>
+                        
+        <?php
+        //禁用错误报告
+        error_reporting(0);
+        //header("Content-type: text/html; charset=utf-8");
+        ?>
+
+
+
+
+
+        <?php
+
+            //首页通知公告
+        header("Content-type: text/html; charset=utf-8");
+        include_once "admin/conn.php"; 
+        $sql = "select * from ".$contest1_table." where ".$table_state."=".$articlestate." and ".$table_class_id."=".$newsarticletypeid." order by ".$table_article_id." desc  ";
+        $index0total=mysql_num_rows(mysql_query($sql));  //获取文章*    //echo $index0total;
+        $index0pagenum=ceil($index0total/$index0num);      //获得文章总页数 pagenum
+        //echo $index0pagenum;
+        //页面参数检测
+            if($index0pagenum==0){
+                echo "暂时无文章";
+             }
+            else if($index0page>$index0pagenum || $index0page == 0){
+                Echo "Error : Can Not Found The page .";
+                $index0page=1;
+            //Exit;
+            }
+        $index0prev_page=$index0page-1;
+        $index0next_page=$index0page+1;
+        $off0set=($index0page-1)*$index0num;
+        $sql = "select * from ".$contest1_table."  where ".$table_state."=".$articlestate." and ".$table_class_id."=".$newsarticletypeid."  order by ".$table_article_id." desc   limit $off0set,$index0num ";
+        $result = mysql_query($sql);
+        $i=0;//判断奇偶行
+        if($result&&mysql_num_rows($result)>0){
+            while ($row = mysql_fetch_array($result)) {
+                $article_id = $row[$table_article_id];
+                $article_title = $row[$table_article_title];
+                $i++;       
+                if(($i%2)==1){
+                          echo "<tr>
+                            <td><a href='article.php?articleid=".$article_id."' target='_blank'>".$article_title."</a></td>
+                        </tr>";}
+                    else {
+                          echo "<tr>
+                            <td><a href='article.php?articleid=".$article_id."' target='_blank'>".$article_title."</a></td>        
+                        </tr>";
+                    }
+                }
+            }
+        //mysql_close();
+        ?>
+                        </tbody>
+                    </table> 
+
+
+
+            <div class="inline pull-right page">
+                          共<?php echo $index0pagenum;?>页 &nbsp;当前第<?php echo $index0page; 
+                         ?>页  
+
+                     
+                        <?php
+                        if($index0page!=1){
+                            echo "<a class='btn btn-default' role='button' href='index.php?index0page=1'>首页</a>";
+                        }
+
+                        
+                        ?>
+
+                         <?php
+                        if($index0page>1)
+                        echo "<a class='btn btn-default' role='button' href='index.php?index0page=".$index0prev_page."'>上一页</a>";
+                        ?>
+
+                        <?php
+                        if($index0page<$index0pagenum)
+                        echo "<a class='btn btn-default' role='button' href='index.php?index0page=".$index0next_page."'>下一页</a>";
+                        ?>
+                        <?php
+                        if($index0page<$index0pagenum)
+                        echo "<a class='btn btn-default' role='button' href='index.php?index0page=".$index0pagenum."'>尾页</a>";
+                        ?>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+       
+
+
+        <div class="col-lg-8">
+
+            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                <li class="<?php 
+                                if(!$_GET['schoolname'])
+                                    if(!$_GET['placeid'])
+                                        if(!$_GET['placename'])
+                                            echo  "active"; ?>"><a href="#home" target="_blank" role="tab" data-toggle="tab">最新资讯</a></li>
+                
+                <li class=""><a href="#profile2" role="tab" data-toggle="tab">专业查询(非五年制)</a></li>
+                <li class=""><a href="#profile4" role="tab" data-toggle="tab">地区查询(非五年制)</a></li>
+                <li class=""><a href="jiansuo2" role="tab" >检索</a></li>
+                 <li class=""><a href="jiansuo" role="tab"  class="btn btn-primary" style=" font-size:18px;">在线报名</a></li>
+            </ul>
+
+
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade <?php if(!$_GET['schoolname']&!$_GET['placeid']&!$_GET['placename']) echo  "active in"; ?>" id="home">
+                    <table class="table table-hover table-responsive">
+                        <tbody>
+        <?php
+        //禁用错误报告
+        error_reporting(0);
+        $getplacename=mysql_real_escape_string($_GET['placename']);
+        //header("Content-type: text/html; charset=utf-8");
+        ?>
+
+
+
+
+
+        <?php
+
+            //首页最新资讯
+        header("Content-type: text/html; charset=utf-8");
+        include_once "admin/conn.php"; 
+        $sql = "select * from ".$contest1_table." where ".$table_state."=".$articlestate." and ".$table_class_id."=".$indexarticletypeid." order by ".$table_article_id." desc  ";
+            $indextotal=mysql_num_rows(mysql_query($sql));  //获取文章总记录数
+            $indexpagenum=ceil($indextotal/$indexnum);      //获得文章总页数 pagenum
+
+        //页面参数检测
+            if($indexpagenum==0){
+                echo "暂时无文章";
+             }
+            else if($indexpage>$indexpagenum || $indexpage == 0){
+                Echo "Error : Can Not Found The page .";
+                $indexpage=1;
+            //Exit;
+            }
+        $indexprev_page=$indexpage-1;
+        $indexnext_page=$indexpage+1;
+        $offset=($indexpage-1)*$indexnum;
+        if(!$_GET["schoolid"]) 
+            $sql = "select * from ".$contest1_table."  where ".$table_state."=".$articlestate." and ".$table_class_id."=".$indexarticletypeid."  order by ".$table_article_id." desc   limit $offset,$indexnum ";
+        else{
+            $school_id=$_GET["schoolid"];
+            $sql = "select * from ".$contest1_table." where ".$table_sch_id."=".$school_id."  and  ".$table_state."=".$articlestate." and ".$table_class_id."=".$indexarticletypeid."  order by ".$table_article_id." desc  limit $offset,$indexnum  ";}
+            $result = mysql_query($sql);
+            $i=0;//判断奇偶行
+            if($result&&mysql_num_rows($result)>0){
+                while ($row = mysql_fetch_array($result)) {
+                    $article_id = $row[$table_article_id];
+                    $article_title = $row[$table_article_title];
+                    $i++;       
+                    if(($i%2)==1){
+                          echo "<tr>
+                            <td><a href='article.php?articleid=".$article_id."' target='_blank'>".$article_title."</a></td>
+                        </tr>";}
+                    else {
+                          echo "<tr  >
+                            <td><a href='article.php?articleid=".$article_id."' target='_blank'>".$article_title."</a></td>        
+                        </tr>";
+                    }
+                }
+            }
+        //mysql_close();
+        ?>
+ 
+                        
+                        
+                        </tbody>
+                    </table>
+                    <div class="inline pull-right page">
+                          共<?php echo $indexpagenum;?>页 &nbsp;当前第<?php echo $indexpage; 
+                         ?>页  
+
+                     
+                        <?php
+                        if($indexpage!=1)
+                        echo "<a class='btn btn-default' role='button' href='index.php?indexpage=1'>首页</a>";
+                        ?>
+
+                         <?php
+                        if($indexpage>1)
+                        echo "<a class='btn btn-default' role='button' href='index.php?indexpage=".$indexprev_page."'>上一页</a>";
+                        ?>
+
+                        <?php
+                        if($indexpage<$indexpagenum)
+                        echo "<a class='btn btn-default' role='button' href='index.php?indexpage=".$indexnext_page."'>下一页</a>";
+                        ?>
+                        <?php
+                        if($indexpage<$indexpagenum)
+                        echo "<a class='btn btn-default' role='button' href='index.php?indexpage=".$indexpagenum."'>尾页</a>";
+                        ?>
+                    </div>
+                </div>
+
+
+                
+
+               
+
+
+                <!-- 游戏栏目 -->
+                <div class="tab-pane fade" id="profile2">
+
+
+
+                <table class="table table-hover table-responsive">
+                       
+                        <tbody>
+
+
+<?php
+                        
+        $sql = "select * from yx_jh   ";
+        $result = mysql_query($sql);
+        $data = array();
+         while($row=mysql_fetch_array($result))
+        {
+            $data[] = $row["zydl"]; // 把第一列压入到数组中
+        }
+        $unique_data = array_unique ( $data ); 
+        //print_r ( $unique_data );
+        
+        foreach($unique_data as $key=>$value){
+            echo "<tr  class='info'><td>".$value."</td><td></td><td></td><td></td></tr>";
+            $sql = "select * from yx_jh where zydl='".$value."'  ";
+            $result1 = mysql_query($sql);
+            $data1 = array();
+            while($row1=mysql_fetch_array($result1))
+            {
+                $data1[] = $row1["zymc"]; // 把第一列压入到数组中
+            }
+            $unique_data1 = array_unique ( $data1 );
+            $i=1;
+            $szcd=count($data1);
+            foreach($unique_data1 as $key1=>$value1){
+                if(($i%3)==1)
+                    echo "<tr><td></td><td><a href='index2.php?zy=".$value1."'>".$value1."</a></td>";
+                if(($i%3)==2)
+                    echo "<td><a href='index2.php?zy=".$value1."'>".$value1."</a></td>";
+                if(($i%3)==0)
+                    echo "<td><a href='index2.php?zy=".$value1."'>".$value1."</a></tr>";
+                $i++;
+                
+
+
+            }
+            
+
+
+            echo "</tr>";
+        }
+        
+        
+
+?>
+</tbody>
+</table>
+
+
+
+                    
+                        <!-- <thead>
+                        <tr>
+                            <th>类型</th>
+                            <th>名称</th>
+                            <th>地点</th>
+                            <th>时间</th>
+                            <th>详情</th>
+                            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        </tr>
+                        </thead> -->
+                       
+
+
+                       
+
+    
+                          
+                      
+                </div>
+                
+                <!-- 按地区查询（yx_xx） -->
+                <div class="tab-pane fade <?php if($_GET['placename']) echo  "active in"; ?>" id="profile4">
+                    <table class="table table-hover table-responsive">
+                       
+                        <tbody>
+
+
+<?php
+                        
+        
+        $sql = "select * from yx_xx   ";
+        $result = mysql_query($sql);
+         $data = array();
+         $i=0;
+         while($row=mysql_fetch_array($result))
+        {
+            $data[] = $row["ds"]; // 把第一列压入到数组中
+        }
+        $unique_data = array_unique ( $data ); 
+
+
+        foreach($unique_data as $key=>$value){
+            $i++;
+            if(($i%8)==1)
+                          echo "<tr>";
+            echo "<td><a class='btn btn-default' role='button'   href='index.php?placename=".$value."'>".$value."</a></td>";
+            if(($i%8)==0)
+                          echo "</tr>";
+        }        
+
+
+?>
+</tbody>
+</table>
+
+
+<table class="table table-hover table-responsive">
+                       
+                        <tbody>
+
+
+
+                        <?php
+
+
+    
+    header("Content-type: text/html; charset=utf-8");
+    if(!$_GET['placename'])
+        $sql = "select * from yx_xx order by  convert(mc using gbk) asc;  ";
+    else if($_GET['placename']=='index')
+        $sql = "select * from yx_xx order by  convert(mc using gbk) asc;  ";
+    else 
+        $sql = "select * from yx_xx where  ds='".mysql_real_escape_string($getplacename)."';  ";
+
+    $placetotal=mysql_num_rows(mysql_query($sql)); //查询数据的总数total
+    $placepagenum=ceil($placetotal/$num);  //获得总页数 pagenum
+    //假如传入的页数参数apge 大于总页数 pagenum，则显示错误信息
+    If($placepage>$placepagenum || $placepage == 0){
+       Echo "暂无数据.";
+       //Exit;
+   }
+    $placeoffset=($placepage-1)*$num;
+    $placeprev_page=$placepage-1;                             //前一页
+    $placenext_page=$placepage+1;     
+
+
+   if(!$_GET['placename'])
+        $sql = "select * from yx_xx order by  convert(mc using gbk) asc limit $placeoffset,$num;  ";
+    else if($_GET['placename']=='index')
+        $sql = "select * from yx_xx order by  convert(mc using gbk) asc limit $placeoffset,$num;  ";
+    else    {
+
+        $sql = "select * from yx_xx where ds='".mysql_real_escape_string($getplacename)."' limit $placeoffset,$num;";}
+//        echo $getplacename;
+
+    //echo $_GET['schoolname'];
+    if($_GET['placename']=='index'){
+        echo "<tr  class='info'><td><a href='#'>以地区检索</a></td><td>共".$placetotal."个学校</td><td></td>"; if($faq==1) echo "<td></td>";echo "</tr>";}
+    else if($_GET['placename']==''){
+        echo "<tr  class='info'><td><a href='#'>以地区检索</a></td><td>共".$placetotal."个学校</td><td></td>"; if($faq==1) echo "<td></td>";echo "</tr>";}
+    else {echo "<tr  class='info'><td><a href='#'>以&nbsp;".$getplacename."&nbsp;检索</a></td><td></td><td>共".$placetotal."个学校</td>"; if($faq==1) echo "<td></td>";echo "</tr>";}
+
+$result = mysql_query($sql);
+    $i=0;
+    if($result&&mysql_num_rows($result)>0){
+        while ($row = mysql_fetch_array($result)) {
+            $sch_id = $row['bh'];
+            //echo $sch_id;
+            $sch_name = $row['mc'];
+            $guanwang = $row['web'];
+            $i++;
+            if($faq!=1){
+                if(($i%2)==1){
+                          echo "<tr>
+                            <td><a href='http://".$guanwang."' target='_blank'>".$sch_name."</a></td>
+                            <td><a href='zsjz.php?schoolid=".$row['dm']."' target='_blank'>招生简章</a></td>
+                            <td><a href='jiansuo2/school2.php?schoolbh=".$row['bh']."' target='_blank'>招生计划</a></td>
+                        </tr>"; 
+
+                        }
+            else {
+                          echo "<tr  class='info'>
+                            <td><a href='http://".$guanwang."' target='_blank'>".$sch_name."</a></td>
+                            <td><a href='zsjz.php?schoolid=".$row['dm']."' target='_blank'>招生简章</a></td>
+                            <td><a href='jiansuo2/school2.php?schoolbh=".$row['bh']."' target='_blank'>招生计划</a></td>
+                        </tr>"; }
+            }
+            else {
+                if(($i%2)==1){
+                          echo "<tr>
+                            <td><a href='http://".$guanwang."' target='_blank'>".$sch_name."</a></td>
+                            <td><a href='liuyan/liuyan/index.php?action=liuyan&ts=list&yxdm=".$row['dm']."' target='_blank'>在线咨询</a></td>
+                            <td><a href='zsjz.php?schoolid=".$row['dm']."' target='_blank'>招生简章</a></td>
+                            <td><a href='jiansuo2/school2.php?schoolbh=".$row['bh']."' target='_blank'>招生计划</a></td>
+                        </tr>"; 
+
+                        }
+            else {
+                          echo "<tr  class='info'>
+                            <td><a href='http://".$guanwang."' target='_blank'>".$sch_name."</a></td>
+                            <td><a href='liuyan/liuyan/index.php?action=liuyan&ts=list&yxdm=".$row['dm']."' target='_blank'>在线咨询</a></td>
+                            <td><a href='zsjz.php?schoolid=".$row['dm']."' target='_blank'>招生简章</a></td>
+                            <td><a href='jiansuo2/school2.php?schoolbh=".$row['bh']."' target='_blank'>招生计划</a></td>
+                        </tr>"; }
+            }       
+            
+
+            
+        }
+    }
+           
+           
+  
+    //mysql_close();
+?>
+
+                          
+                        </tbody>
+                    </table>
+                    
+
+                    <div class="inline pull-right page">
+                          共<?php echo $placepagenum;?>页 &nbsp;当前第<?php echo $placepage; 
+                         ?>页  
+
+                     
+                        <?php
+                        if($placepage!=1)
+                        echo "<a class='btn btn-default' role='button' href='index.php?placename=".$_GET['placename']."&placepage=1'>首页</a>";
+                        ?>
+
+                         <?php
+                        if($placepage>1)
+                        echo "<a class='btn btn-default' role='button' href='index.php?placename=".$_GET['placename']."&placepage=".$place2prev_page."'>上一页</a>";
+                        ?>
+
+                        <?php
+                        if($placepage<$placepagenum)
+                            if($_GET['placename']=='')
+                                echo "<a class='btn btn-default' role='button' href='index.php?placename=index&placepage=".$placenext_page."'>下一页</a>";
+                                else
+                                    echo "<a class='btn btn-default' role='button' href='index.php?placename=".$_GET['placename']."&placepage=".$placenext_page."'>下一页</a>";
+
+
+                        ?>
+                        <?php
+                        if($placepage<$placepagenum)
+                            if($_GET['placename']=='')
+                                echo "<a class='btn btn-default' role='button' href='index.php?placename=index&placepage=".$placepagenum."'>尾页</a>";
+                            else
+                                echo "<a class='btn btn-default' role='button' href='index.php?placename=".$_GET['placename']."&placepage=".$placepagenum."'>尾页</a>";
+                        ?>
+                       
+
+                        
+                
+                </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<?php require("footer.php");?>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/index.js"></script>
+
+<script type="text/javascript">//<![CDATA[
+var curpage=document.hash.substr(1);
+for (var i=1;i<=4;++i) {
+  document.getElementById('qukuai'+i).style.display=(i==curpage)?'':'none';
+}
+//]]></script>
+</body>
+</html>

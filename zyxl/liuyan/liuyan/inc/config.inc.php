@@ -1,0 +1,14 @@
+﻿<?php
+
+//时区配置
+date_default_timezone_set('Etc/GMT-8');
+//数据库配置
+define("DB_HOST", "localhost");
+define("DB_USER", "root");
+define("DB_PASSWORD", "ckq888start");
+define("DB_NAME", "ahzy2015");
+define("DB_PRE", "");//数据库前缀
+//权限设置
+
+//smarty设置
+define('MY_SMARTY',ROOT.'/view');

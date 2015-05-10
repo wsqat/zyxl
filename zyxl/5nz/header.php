@@ -1,0 +1,58 @@
+<?php header("Content-type: text/html; charset=utf-8");
+error_reporting(0); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0039)http://zzlq.heao.gov.cn/SchoolPlan.aspx -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>河南省普通中等专业学校招生服务平台</title>
+<meta content="" name="keywords">
+<meta content="" name="description">
+<link rel="stylesheet" href="./河南省普通中等专业学校招生服务平台_files/style.css" type="text/css">
+<script language="javascript" src="./河南省普通中等专业学校招生服务平台_files/slide.js" type="text/javascript"></script>
+<script language="JavaScript" src="./河南省普通中等专业学校招生服务平台_files/scroll.js" type="text/javascript"></script>
+<script language="JavaScript" src="./河南省普通中等专业学校招生服务平台_files/SlideTrans.js" type="text/javascript"></script>
+<style type="text/css"> 
+.container, .container img{width:195px; height:215px;}
+.container img{border:0;vertical-align:top;}
+</style>
+
+    <link href="./河南省普通中等专业学校招生服务平台_files/innerCss.css" rel="stylesheet" type="text/css">
+    <link href="./河南省普通中等专业学校招生服务平台_files/style.css" rel="stylesheet" type="text/css">
+    <link href="./河南省普通中等专业学校招生服务平台_files/default.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="http://zzlq.heao.gov.cn/js/skins/default.css?4.1.7"><script type="text/javascript" src="./河南省普通中等专业学校招生服务平台_files/artDialog.js" ></script>
+
+    <script type="text/javascript" src="./河南省普通中等专业学校招生服务平台_files/iframeTools.js"></script>
+
+    <script type="text/javascript">
+function nTabs(thisObj,Num){
+if(thisObj.className == "active")return;
+var tabObj = thisObj.parentNode.id;
+var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+for(i=0; i <tabList.length; i++)
+{
+if (i == Num)
+{
+   thisObj.className = "active"; 
+      document.getElementById(tabObj+"_Content"+i).style.display = "block";
+}else{
+   tabList[i].className = "normal"; 
+   document.getElementById(tabObj+"_Content"+i).style.display = "none";
+}
+} 
+}
+    </script>
+
+
+</head>
+<body>
+    
+<div class="wrap head">
+    <div class="logo fl"><h2><a href="http://zzlq.heao.gov.cn/SchoolPlan.aspx#"><img src="./河南省普通中等专业学校招生服务平台_files/logo.gif" alt="河南省普通中等专业学校招生服务平台"></a></h2></div>
+</div>
+
+<!--导航-->
+
+
+    
+    <!-- 通栏广告 -->

@@ -1,0 +1,68 @@
+  <?php
+  $sch_table='yx_xx';
+    $table_article_id='article_id';       //文章id
+    $table_article_title='article_title'; //文章标题
+    $table_class_id='class_id';//文章类别id
+    $table_sch_id='FYXDM';//学校唯一id
+    $table_sch_name='FYXMC';//学校名称
+    $table_state='state';//文章状态
+    $table_dsdm='FDSDM';
+    $table_dsmc='FDSMC';
+    $dsdmb_table='dsdmb';
+    $Fyxwzdm_table='Fyxwzdm';//院校位置代码
+    $Fyxgw_table ='FYXWZ';//院校网站
+    $zy_table='xx_zy';//专业表
+//变量控制
+    $articlestate=1;         //文章可见$table_state值
+    $newsarticletypeid=2;   //首页通知公告id
+    $indexarticletypeid=1;    //首页最新资讯id
+    $num=10;                //学校列表每页显示条数
+    $indexnum=10;           //最新资讯每页显示10条数据
+    $index0num=13;          //通知公告显示条数
+    $page=isset($_GET['page'])?intval($_GET['page']):1;
+    $indexpage=isset($_GET['indexpage'])?intval($_GET['indexpage']):1;
+    $index0page=isset($_GET['index0page'])?intval($_GET['index0page']):1;
+    $placepage=isset($_GET['placepage'])?intval($_GET['placepage']):1;
+    $getplaceid = isset($_GET["placeid"])?$_GET["placeid"]:"";
+    if($getplaceid!=''&$getplaceid!='index')
+        $getplaceid=isset($_GET['placeid'])?intval($_GET['placeid']):1;
+
+    //echo $getplaceid;
+    ?>
+
+    <!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>安徽省普通中等专业学校招生服务平台</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Head Navbar -->
+
+<!-- Body Main -->
+<div class="container">
+    <div class="jumbotron">
+        <img src="images/ahzcj.jpg" alt="安徽" id="bg">
+        <h1>
+         </h1>
+    <br></br>
+    
+
+        <p>
+           
+        </p>
+
+        
+
+    </div>
